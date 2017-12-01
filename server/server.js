@@ -19,6 +19,7 @@ app.post('/todos', (req, res) => {
     todo.save().then((doc) => {
         res.send(doc);
     }, (err) => {
+        // status 400 for bad request / most likely request didn't fit model
         res.status(400).send(err);
     });
 });
