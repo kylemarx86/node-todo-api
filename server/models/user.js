@@ -11,7 +11,8 @@ var UserSchema = new mongoose.Schema({
         minlength: 1,
         unique: true,
         validate: {
-            validator: validator.isEmail,
+            // validator: validator.isEmail,       // possible cause of deprecation warning
+            validator: value => validator.isEmail(value),
             message: '{VALUE} is not a valid email'
         }
     },
@@ -30,6 +31,9 @@ var UserSchema = new mongoose.Schema({
             required: true
         }
     }]
+}, {
+    // settings object
+    usePushEach: true
 });
 
 UserSchema.methods.toJSON = function() {
